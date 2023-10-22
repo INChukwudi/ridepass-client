@@ -1,0 +1,335 @@
+<!-- Sign In Modal-->
+<ng-template #toggleFirstModal let-modal>
+  <div class="modal-content">
+    <div class="modal-header bg-secondary">
+      <ul class="nav nav-tabs card-header-tabs" role="tablist" ngbNav #nav="ngbNav">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink class="nav-link fw-medium"><i class="ci-unlocked me-2
+              mt-n1"></i>Sign in</a>
+          <ng-template ngbNavContent>
+            <form class="needs-validation tab-pane fade show active" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label" for="si-email">Email address</label>
+                <input class="form-control" type="email" id="si-email" placeholder="johndoe@example.com" required formControlName="email" [ngClass]="{ 'is-invalid': submitted
+                  && f['email'].errors }">
+                <div class="invalid-feedback">Please provide a valid email
+                  address.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="si-password">Password
+                  {{loginPassfield}}</label>
+                <div class="password-toggle">
+                  <input class="form-control" [type]="loginPassfield ? 'text' :
+                    'password'" id="si-password" required formControlName="password" [ngClass]="{ 'is-invalid':
+                    submitted && f['password'].errors }">
+                  <label class="password-toggle-btn" aria-label="Show/hide
+                    password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator" [ngClass]="{'mdi-eye-off-outline': !loginPassfield,
+                      'mdi-eye-outline': loginPassfield
+                      }" (click)="toggleLoginPassField()"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3 d-flex flex-wrap justify-content-between">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="si-remember">
+                  <label class="form-check-label" for="si-remember">Remember me</label>
+                </div><a class="fs-sm" href="javascript:void(0);">Forgot
+                password?</a>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Sign in</button>
+            </form>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink class="nav-link fw-medium"><i class="ci-user me-2
+              mt-n1"></i>Sign up</a>
+          <ng-template ngbNavContent>
+            <form class="needs-validation tab-pane fade show active" autocomplete="off" [formGroup]="SignupForm" (ngSubmit)="SignupSubmit()">
+              <div class="mb-3">
+                <label class="form-label" for="su-name">Full name</label>
+                <input class="form-control" type="text" id="su-name" placeholder="John Doe" required formControlName="name" [ngClass]="{ 'is-invalid': submit &&
+                  fa['name'].errors }">
+                <div class="invalid-feedback">Please fill in your name.</div>
+              </div>
+              <div class="mb-3">
+                <label for="su-email">Email address</label>
+                <input class="form-control" type="email" id="su-email" placeholder="johndoe@example.com" required formControlName="email" [ngClass]="{ 'is-invalid': submit &&
+                  fa['email'].errors }">
+                <div class="invalid-feedback">Please provide a valid email
+                  address.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="su-password">Password</label>
+                <div class="password-toggle">
+                  <input class="form-control" [type]="signupPassfield ? 'text' :
+                    'password'" id="su-password" required formControlName="password" [ngClass]="{ 'is-invalid': submit
+                    && fa['password'].errors }">
+                  <label class="password-toggle-btn" aria-label="Show/hide
+                    password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator" [ngClass]="{'mdi-eye-off-outline': !signupPassfield,
+                      'mdi-eye-outline': signupPassfield
+                      }" (click)="togglesignupPassfield()"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="su-password-confirm">Confirm
+                  password</label>
+                <div class="password-toggle">
+                  <input class="form-control" [type]="signupCPassfield ? 'text'
+                    : 'password'" id="su-password-confirm" required>
+                  <label class="password-toggle-btn" aria-label="Show/hide
+                    password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator" [ngClass]="{'mdi-eye-off-outline': !signupCPassfield,
+                      'mdi-eye-outline': loginPassfield
+                      }" (click)="togglesignupCPassfield()"></span>
+                  </label>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Sign up</button>
+            </form>
+          </ng-template>
+        </li>
+      </ul>
+      <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" (click)="modal.close()"></button>
+    </div>
+    <div class="modal-body tab-content py-4">
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Navbar 3 Level (Light)-->
+<header class="shadow-sm" (window:scroll)="windowScroll()" id="home">
+  <!-- Topbar-->
+  <div class="topbar topbar-dark bg-dark">
+    <div class="container">
+      <div class="topbar-text dropdown d-md-none" ngbDropdown>
+        <a class="topbar-link dropdown-toggle" href="javascript:void(0);" data-bs-toggle="dropdown" ngbDropdownToggle>Useful links</a>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li><a class="dropdown-item" href="tel:00331697720"><i class="ci-support text-muted me-2"></i>(00) 33 169
+            7720</a></li>
+          <li><a class="dropdown-item" routerLink="/shop/order-tracking"><i class="ci-location text-muted me-2"></i>Order
+            tracking</a></li>
+        </ul>
+      </div>
+      <div class="topbar-text text-nowrap d-none d-md-inline-block"><i class="ci-support"></i><span class="text-muted me-1">Support</span><a class="topbar-link" href="tel:00331697720">(00) 33 169 7720</a></div>
+      <div class="tns-carousel tns-controls-static d-none d-md-block">
+        <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+          <ng-template ngbSlide>
+            <div class="topbar-text">Free shipping for order over $200</div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <div class="topbar-text">We return money within 30 days</div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <div class="topbar-text">Friendly 24/7 customer support</div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div class="ms-3 text-nowrap"><a class="topbar-link me-4 d-none
+          d-md-inline-block" routerLink="/shop/order-tracking"><i class="ci-location"></i>Order
+        tracking</a>
+        <div class="topbar-text dropdown disable-autohide" ngbDropdown>
+          <a class="topbar-link dropdown-toggle" href="javascript:void(0);" data-bs-toggle="dropdown" ngbDropdownToggle>
+            <img class="me-2" src="{{flagvalue}}" width="20" alt="English">{{selectedLanguage}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+            <li *ngFor="let item of listLang" (click)="setLanguage(item.text,
+              item.lang, item.flag,item.language)">
+              <a class="dropdown-item pb-1" [ngClass]="{'active': cookieValue
+                === item.lang}" href="javascript:void(0);">
+                <img class="me-2" src="{{item.flag}}" width="20" alt="{{item.text}}">{{item.text}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+  <div class="navbar-sticky bg-light">
+    <div class="navbar navbar-expand-lg navbar-light">
+      <div class="container"><a class="navbar-brand d-none d-sm-block
+          flex-shrink-0" routerLink="/fashion-store-v1"><img src="assets/img/logo-dark.png" width="142" alt="Cartzilla"></a><a class="navbar-brand d-sm-none flex-shrink-0 me-2" routerLink="/fashion-store-v1"><img src="assets/img/logo-icon.png" width="74" alt="Cartzilla"></a>
+        <div class="input-group d-none d-lg-flex mx-4">
+          <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y
+            text-muted fs-base me-3"></i>
+        </div>
+        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" (click)="collapse.toggle()"><span class="navbar-toggler-icon"></span></button>
+          <a class="navbar-tool navbar-stuck-toggler" href="javascript:void(0);" (click)="menuShow()"><span class="navbar-tool-tooltip">Expand menu</span>
+            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon
+                ci-menu"></i></div>
+          </a><a class="navbar-tool d-none d-lg-flex" routerLink="/account/wishlist"><span class="navbar-tool-tooltip">Wishlist</span>
+          <div class="navbar-tool-icon-box"><i class="navbar-tool-icon
+                ci-heart"></i></div>
+        </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="javascript:void(0);" data-bs-toggle="modal" (click)="toggleModal(toggleFirstModal)">
+          <div class="navbar-tool-icon-box"><i class="navbar-tool-icon
+                ci-user"></i></div>
+          <div class="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My
+            Account</div>
+        </a>
+          <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box
+              bg-secondary dropdown-toggle" routerLink="/shop/cart"><span class="navbar-tool-label">{{cartDatas.length}}</span><i class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text price" routerLink="/shop/cart"><small>My
+            Cart</small>${{calculatetotal(subTotal)}}</a>
+            <!-- Cart dropdown-->
+            <div class="dropdown-menu dropdown-menu-end">
+              <div class="widget widget-cart px-3 pt-2 pb-3" style="width:
+                20rem;">
+                <div style="height: 15rem; overflow-x: hidden;" data-simplebar data-simplebar-auto-hide="false">
+                  <div class="widget-cart-item pb-2 border-bottom" *ngFor="let
+                    data of cartDatas; let i= index">
+                    <button class="btn-close text-danger" type="button" aria-label="Remove" (click)="remove(i)"><span aria-hidden="true">&times;</span></button>
+                    <div class="d-flex align-items-center"><a class="flex-shrink-0" routerLink="/shop/single-v1"><img src="{{data.image}}" width="64" alt="Product"></a>
+                      <div class="ps-2">
+                        <h6 class="widget-product-title"><a routerLink="/shop/single-v1">{{data.name}}</a>
+                        </h6>
+                        <div class="widget-product-meta"><span class="text-accent me-2">${{data.price}}</span><span class="text-muted">x 1</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-between
+                  align-items-center py-3">
+                  <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1 price">${{calculatetotal(subTotal)}}</span></div><a class="btn btn-outline-secondary btn-sm" routerLink="/shop/cart">Expand cart<i class="ci-arrow-right ms-1 me-n1"></i></a>
+                </div><a class="btn btn-primary btn-sm d-block w-100" routerLink="/shop/checkout-details"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2
+      pt-0 pb-2">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarCollapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <!-- Search-->
+          <div class="input-group d-lg-none my-3"><i class="ci-search position-absolute top-50 start-0
+              translate-middle-y text-muted fs-base ms-3"></i>
+            <input class="form-control rounded-start" type="text" placeholder="Search for products">
+          </div>
+          <!-- Departments menu-->
+          <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle
+                ps-lg-0" href="javascript:void(0);" data-bs-toggle="dropdown"><i class="ci-view-grid me-2"></i>Departments</a>
+              <div class="dropdown-menu px-2 pb-4">
+                <div class="d-flex flex-wrap flex-sm-nowrap">
+                  <div class="mega-dropdown-column pt-3 pt-sm-4 px-2 px-lg-3">
+                    <div class="widget widget-links"><a class="d-block
+                        overflow-hidden rounded-3 mb-3" href="javascript:void(0);"><img src="assets/img/shop/departments/01.jpg" alt="Clothing"></a>
+                      <h6 class="fs-base mb-2">Clothing</h6>
+                      <ul class="widget-list">
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Women's
+                          clothing</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Men's
+                          clothing</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Kid's
+                          clothing</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
+                    <div class="widget widget-links"><a class="d-block
+                        overflow-hidden rounded-3 mb-3" href="javascript:void(0);"><img src="assets/img/shop/departments/02.jpg" alt="Shoes"></a>
+                      <h6 class="fs-base mb-2">Shoes</h6>
+                      <ul class="widget-list">
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Women's
+                          shoes</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Men's
+                          shoes</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Kid's
+                          shoes</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
+                    <div class="widget widget-links"><a class="d-block
+                        overflow-hidden rounded-3 mb-3" href="javascript:void(0);"><img src="assets/img/shop/departments/03.jpg" alt="Gadgets"></a>
+                      <h6 class="fs-base mb-2">Gadgets</h6>
+                      <ul class="widget-list">
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Smartphones &amp; Tablets</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Wearable gadgets</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">E-book
+                          readers</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap flex-sm-nowrap">
+                  <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
+                    <div class="widget widget-links"><a class="d-block
+                        overflow-hidden rounded-3 mb-3" href="javascript:void(0);"><img src="assets/img/shop/departments/04.jpg" alt="Furniture"></a>
+                      <h6 class="fs-base mb-2">Furniture &amp; Decor</h6>
+                      <ul class="widget-list">
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Home
+                          furniture</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Office
+                          furniture</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Lighting and decoration</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
+                    <div class="widget widget-links"><a class="d-block
+                        overflow-hidden rounded-3 mb-3" href="javascript:void(0);"><img src="assets/img/shop/departments/05.jpg" alt="Accessories"></a>
+                      <h6 class="fs-base mb-2">Accessories</h6>
+                      <ul class="widget-list">
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Hats</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Sunglasses</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Bags</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
+                    <div class="widget widget-links"><a class="d-block
+                        overflow-hidden rounded-3 mb-3" href="javascript:void(0);"><img src="assets/img/shop/departments/06.jpg" alt="Entertainment"></a>
+                      <h6 class="fs-base mb-2">Entertainment</h6>
+                      <ul class="widget-list">
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Kid's
+                          toys</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Video
+                          games</a></li>
+                        <li class="widget-list-item mb-1"><a class="widget-list-link" href="javascript:void(0);">Outdoor
+                          / Camping</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <!-- Primary menu-->
+          <app-menu></app-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Hero slider-->
+
+<!-- Toolbar for handheld devices (Default)-->
+<div class="handheld-toolbar">
+  <div class="d-table table-layout-fixed w-100">
+    <a class="d-table-cell handheld-toolbar-item sidebar-filter d-none" href="javascript:void(0);" data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar" (click)="sidebar()"><span class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span class="handheld-toolbar-label">Filters</span></a>
+    <a class="d-table-cell handheld-toolbar-item" routerLink="/account/wishlist">
+      <span class="handheld-toolbar-icon">
+        <i class="ci-heart"></i>
+      </span>
+      <span class="handheld-toolbar-label">Wishlist</span>
+    </a>
+    <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" (click)="collapse.toggle()" onclick="window.scrollTo(0, 0)">
+      <span class="handheld-toolbar-icon">
+        <i class="ci-menu"></i>
+      </span>
+      <span class="handheld-toolbar-label">Menu</span>
+    </a>
+    <a class="d-table-cell handheld-toolbar-item" routerLink="/shop/cart">
+      <span class="handheld-toolbar-icon">
+        <i class="ci-cart"></i>
+        <span class="badge bg-primary rounded-pill ms-1">4</span>
+      </span><span class="handheld-toolbar-label">$265.00</span></a>
+  </div>
+</div>
