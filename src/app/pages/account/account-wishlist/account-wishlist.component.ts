@@ -45,7 +45,7 @@ export class AccountWishlistComponent implements OnInit {
 
     this.transactionService.makeTransaction(this.transferForm.value).subscribe({
       next: response => {
-        if (response.status === "success") {
+        if (response.status === "Success") {
           this.transferForm.reset();
           setTimeout(() => {
             this.router.navigateByUrl('/account/transactions')
