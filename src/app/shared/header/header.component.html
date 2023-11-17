@@ -20,7 +20,7 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label" for="si-password">Password {{loginPassField}}</label>
+                <label class="form-label" for="si-password">Password</label>
                 <div class="password-toggle">
                   <input class="form-control" [type]="loginPassField ? 'text' : 'password'" id="si-password" required
                          formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
